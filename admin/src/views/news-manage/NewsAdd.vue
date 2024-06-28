@@ -1,14 +1,14 @@
 <template>
-    <div>navbar</div>
-    <div>sidebar</div>
-    <router-view></router-view>
+    <div>添加新闻</div>
 </template>
+
 <script>
 export default {
     components: {},
     props: {},
     data() {
-        return {};
+        return {
+        };
     },
     watch: {},
     computed: {},

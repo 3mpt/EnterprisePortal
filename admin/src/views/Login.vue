@@ -1,22 +1,14 @@
 <template>
   <div>
     login
+    <button @click="handleLogin">login</button>
   </div>
 </template>
 
-<script>
-export default {
-  components: {},
-  props: {},
-  data() {
-    return {
-    };
-  },
-  watch: {},
-  computed: {},
-  methods: {},
-  created() {},
-  mounted() {}
+<script setup>
+const handleLogin = () => {
+  localStorage.setItem("token", "123");
+  console.log("login");
 };
 </script>
 <style lang="scss" scoped>
