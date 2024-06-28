@@ -30,5 +30,14 @@ const routes = [{
     path: '/product-manage/newslist',
     component: () => import('../views/product-manage/ProductList.vue')
 },
+{
+    path: '/',
+    redirect: '/index'
+},
+{
+    path: '/:pathMatch(.*)*',
+    name: "notFound",
+    component: () => import('../views/notfound/NotFound.vue')
+}
 ]
 export default routes
