@@ -23,11 +23,11 @@ const routes = [{
     component: () => import('../views/news-manage/NewsList.vue')
 },
 {
-    path: '/product-manage/addnews',
+    path: '/product-manage/addproduct',
     component: () => import('../views/product-manage/ProductAdd.vue')
 },
 {
-    path: '/product-manage/newslist',
+    path: '/product-manage/productlist',
     component: () => import('../views/product-manage/ProductList.vue')
 },
 {
