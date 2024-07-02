@@ -28,6 +28,7 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 const handleLogin = () => {
   localStorage.setItem('token', '123');
   console.log('login');
@@ -127,6 +128,9 @@ const submitForm = () => {
     if (valid) {
       console.log(loginForm);
       localStorage.setItem('token', '123456');
+      axios.get('users').then((res) => {
+        console.log(res);
+      });
       router.push('/');
     }
   });

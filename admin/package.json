@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@tsparticles/vue3": "^3.0.1",
+    "axios": "^1.7.2",
     "core-js": "^3.8.3",
     "element-plus": "^2.7.6",
     "tsparticles": "^3.4.0",
