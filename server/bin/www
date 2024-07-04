@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('node-serve:server');
 var http = require('http');
+require("../config/db.config.js")
 
 /**
  * Get port from environment and store in Express.

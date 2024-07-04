@@ -126,9 +126,9 @@ const submitForm = () => {
   loginFormRef.value.validate(async (valid) => {
     console.log(valid);
     if (valid) {
-      console.log(loginForm);
-      localStorage.setItem('token', '123456');
-      axios.get('users').then((res) => {
+      // console.log(loginForm);
+      // localStorage.setItem('token', '123456');
+      axios.post('/adminapi/user/login',loginForm).then((res) => {
         console.log(res);
       });
       router.push('/');

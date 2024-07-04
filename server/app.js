@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const UserRouter = require('./routes/admin/UserRouter');
 
 var app = express();
 
@@ -20,18 +20,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/adminapi/1', usersRouter);
-app.use('/adminapi/2', usersRouter);
-app.use('/adminapi/3', usersRouter);
-app.use('/users', usersRouter);
-app.use('/users', usersRouter);
-app.use('/users', usersRouter);
+app.use(UserRouter);
+
 
 /* 
 /adminapi/* 后台系统用的
 /webapi/*  企业官网用的
  */
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
