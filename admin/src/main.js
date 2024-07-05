@@ -6,6 +6,7 @@ import router from "./router";
 import store from "./store";
 import Particles from "@tsparticles/vue3";
 import { loadFull } from "tsparticles"
+import '@/util/axios.config'
 createApp(App).use(ElementPlus).use(Particles, {
     init: async engine => {
         await loadFull(engine); // you can load the full tsParticles library from "tsparticles" if you need it
