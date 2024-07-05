@@ -28,10 +28,8 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-const handleLogin = () => {
-  localStorage.setItem('token', '123');
-  console.log('login');
-};
+import { ElMessage } from 'element-plus';
+import axios from 'axios';
 // 配置particles
 const options = {
   background: {
@@ -125,9 +123,20 @@ const submitForm = () => {
   loginFormRef.value.validate(async (valid) => {
     console.log(valid);
     if (valid) {
-      console.log(loginForm);
-      localStorage.setItem('token', '123456');
-      router.push('/');
+      // console.log(loginForm);
+
+      axios.post('/adminapi/user/login', loginForm).then((res) => {
+        console.log(res);
+        if (res.data.ActionType === 'OK') {
+          // localStorage.setItem('token', '123456');
+          router.push('/index');
+        } else {
+          ElMessage({
+            type: 'error',
+            message: '用户名或密码错误',
+          });
+        }
+      });
     }
   });
 };
