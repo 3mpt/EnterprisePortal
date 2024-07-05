@@ -30,6 +30,8 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
+import {useStore} from 'vuex';
+const store = useStore();
 // 配置particles
 const options = {
   background: {
@@ -128,7 +130,8 @@ const submitForm = () => {
       axios.post('/adminapi/user/login', loginForm).then((res) => {
         console.log(res);
         if (res.data.ActionType === 'OK') {
-          // localStorage.setItem('token', '123456');
+          console.log(res.data);
+          store.commit('changeUserInfo', res.data.data);
           router.push('/index');
         } else {
           ElMessage({
