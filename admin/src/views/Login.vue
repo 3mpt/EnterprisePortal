@@ -123,14 +123,9 @@ const router = useRouter();
 const submitForm = () => {
   // 1.表单验证
   loginFormRef.value.validate(async (valid) => {
-    console.log(valid);
     if (valid) {
-      // console.log(loginForm);
-
       axios.post('/adminapi/user/login', loginForm).then((res) => {
-        console.log(res);
         if (res.data.ActionType === 'OK') {
-          console.log(res.data);
           store.commit('changeUserInfo', res.data.data);
           router.push('/index');
         } else {
