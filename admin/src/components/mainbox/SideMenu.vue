@@ -14,7 +14,7 @@
         <el-icon><Avatar /></el-icon>
         <span>个人中心</span>
       </el-menu-item>
-      <el-sub-menu index="/user-manage">
+      <el-sub-menu index="/user-manage" v-admin>
         <template #title>
           <el-icon>
             <user-filled />
@@ -50,6 +50,7 @@
 
 <script setup>
 import router from '@/router';
+import store from '@/store';
 import {
   HomeFilled,
   Avatar,
@@ -58,6 +59,13 @@ import {
   Reading,
   Pointer,
 } from '@element-plus/icons-vue';
+const vAdmin = {
+  mounted(el) {
+    if (store.state.userInfo.role !== 1) {
+      el.parentNode.removeChild(el);
+    }
+  },
+};
 </script>
 <style lang="scss" scoped>
 .el-aside {

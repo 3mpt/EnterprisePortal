@@ -30,6 +30,8 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
+import {useStore} from 'vuex';
+const store = useStore();
 // 配置particles
 const options = {
   background: {
@@ -121,14 +123,11 @@ const router = useRouter();
 const submitForm = () => {
   // 1.表单验证
   loginFormRef.value.validate(async (valid) => {
-    console.log(valid);
     if (valid) {
-      // console.log(loginForm);
-
       axios.post('/adminapi/user/login', loginForm).then((res) => {
-        console.log(res);
         if (res.data.ActionType === 'OK') {
-          // localStorage.setItem('token', '123456');
+          store.commit('changeUserInfo', res.data.data);
+          store.commit('changeGetterRouter', false);
           router.push('/index');
         } else {
           ElMessage({
