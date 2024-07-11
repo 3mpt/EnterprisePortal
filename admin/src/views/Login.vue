@@ -127,6 +127,7 @@ const submitForm = () => {
       axios.post('/adminapi/user/login', loginForm).then((res) => {
         if (res.data.ActionType === 'OK') {
           store.commit('changeUserInfo', res.data.data);
+          store.commit('changeGetterRouter', false);
           router.push('/index');
         } else {
           ElMessage({

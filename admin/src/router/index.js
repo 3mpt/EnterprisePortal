@@ -35,6 +35,8 @@ router.beforeEach((to, from, next) => {
       next({ path: "/login" })
     } else {
       if (!store.state.isGetterRouter) {
+        // 先删了
+        router.removeRoute("mainbox")
         ConfigRouter()
         next({
           path: to.fullPath
@@ -47,10 +49,24 @@ router.beforeEach((to, from, next) => {
   }
 });
 const ConfigRouter = () => {
+  if(!router.hasRoute("mainbox")){
+    router.addRoute("mainbox", {
+      path: "/mainbox",
+      name: "mainbox",
+      component: () => import("../views/MainBox.vue")
+    })
+  }
   RoutesConfig.forEach(item => {
-    router.addRoute("mainbox", item);
+    checkPermission(item) && router.addRoute("mainbox", item);
   })
   // 改变isGetterRouter的值
   store.commit("changeGetterRouter", true);
+}
+const checkPermission = (item) => {
+  if (item.requireAdmin) {
+    // 如果是管理员
+    return store.state.userInfo.role === 1
+  }
+  return true;
 }
 export default router;
