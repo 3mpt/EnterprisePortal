@@ -64,7 +64,6 @@ const vAdmin = {
     if (store.state.userInfo.role !== 1) {
       el.parentNode.removeChild(el);
     }
-    console.log(el);
   },
 };
 </script>

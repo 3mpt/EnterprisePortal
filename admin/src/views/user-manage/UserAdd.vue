@@ -97,7 +97,7 @@ const handleAvatarChange = (file) => {
   userForm.file = file;
 };
 const submitForm = () => {
-  console.log(userForm);
+
   userFormRef.value.validate(async (valid) => {
     if (valid) {
       const res = await upload('/adminapi/user/add', userForm);
