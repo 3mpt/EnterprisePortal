@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 const UserRouter = require('./routes/admin/UserRouter');
+const NewsRouter = require('./routes/admin/NewsRouter');
 const JWT = require('./util/JWT');
 
 var app = express();
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 
 })
 app.use(UserRouter);
+app.use(NewsRouter);
 
 
 /* 
