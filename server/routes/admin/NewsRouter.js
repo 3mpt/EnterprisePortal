@@ -6,4 +6,9 @@ var NewsRouter = express.Router();
 const multer = require('multer');
 const upload = multer({ dest: 'public/newsuploads/' });
 NewsRouter.post("/adminapi/news/add", upload.single("file"), NewsController.add)
+NewsRouter.post("/adminapi/news/list", upload.single("file"), NewsController.updateList)
+NewsRouter.get("/adminapi/news/list", NewsController.getList)
+NewsRouter.put("/adminapi/news/publish", NewsController.publish)
+NewsRouter.delete("/adminapi/news/list/:id", NewsController.delList)
+NewsRouter.get("/adminapi/news/list/:id", NewsController.getList)
 module.exports = NewsRouter;
