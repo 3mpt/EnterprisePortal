@@ -13,8 +13,7 @@ UserRouter.get("/adminapi/user/list", UserController.list)
 UserRouter.get("/adminapi/user/list/:id", UserController.list)
 UserRouter.delete("/adminapi/user/list/:id", UserController.delList)
 UserRouter.put("/adminapi/user/list/:id", UserController.putList)
-// UserRouter.get("/adminapi/user/list", UserController.list)
-// UserRouter.get("/adminapi/user/list", UserController.list)
+
 
 
 module.exports = UserRouter;

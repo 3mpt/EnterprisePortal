@@ -1,5 +1,5 @@
 <template>
-  <el-page-header content="添加新闻" icon="" title="新闻管理" />
+  <el-page-header content="编辑新闻" title="新闻管理" @back="handleBack()" />
   <el-form
     ref="newsFormRef"
     :model="newsForm"
@@ -11,7 +11,7 @@
       <el-input v-model="newsForm.title" />
     </el-form-item>
     <el-form-item label="内容" prop="content">
-      <editor @event="handleChange" />
+      <editor @event="handleChange" :content="newsForm.content" v-if="showEditor" />
     </el-form-item>
     <el-form-item label="分类" prop="category">
       <el-select v-model="newsForm.category" placeholder="Select" style="width: 100%">
@@ -27,19 +27,23 @@
       <Upload :avatar="newsForm.cover" @change="handleCoverChange" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm()">添加新闻</el-button>
+      <el-button type="primary" @click="submitForm()">更新</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import editor from '@/components/editor/Editor.vue';
 import Upload from '@/components/upload/Upload.vue';
 import upload from '@/util/upload';
-import router from '@/router';
+import { useRouter, useRoute } from 'vue-router';
 import { ElMessage } from 'element-plus';
+import axios from 'axios';
+const router = useRouter();
+const route = useRoute();
 const newsFormRef = ref(null);
+const showEditor = ref(false);
 const newsForm = reactive({
   title: '',
   content: '',
@@ -82,7 +86,7 @@ const submitForm = () => {
     console.log('valid:', newsForm);
 
     if (valid) {
-      const res = await upload('/adminapi/news/add', newsForm);
+      const res = await upload('/adminapi/news/list', newsForm);
       if (res.data.ActionType === 'OK') {
         ElMessage.success('添加成功');
         router.push('/news-manage/newslist');
@@ -90,6 +94,19 @@ const submitForm = () => {
     }
   });
 };
+const handleBack = () => {
+  router.back();
+};
+onMounted(async () => {
+  console.log(route.params);
+  const res = await axios.get(`/adminapi/news/list/${route.params.id}`);
+  console.log('res:', res.data.data[0]);
+  if(res.data.data.length >0){
+    Object.assign(newsForm, res.data.data[0]);
+    showEditor.value = true;
+  }
+  
+});
 </script>
 <style lang="scss" scoped>
 .demo-ruleForm {
