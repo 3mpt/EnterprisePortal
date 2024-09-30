@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 const UserRouter = require('./routes/admin/UserRouter');
 const NewsRouter = require('./routes/admin/NewsRouter');
+const webNewsRouter = require('./routes/web/NewsRouter');
 const ProductRouter = require('./routes/admin/ProductRouter');
 const JWT = require('./util/JWT');
 
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './public')));
-
+app.use(webNewsRouter);
 app.use('/', indexRouter);
 app.use((req, res, next) => {
   // 如果token 有效next
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
 app.use(UserRouter);
 app.use(NewsRouter);
 app.use(ProductRouter);
+
 
 
 /* 
